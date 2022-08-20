@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addToDo } from "../actions/todo_actions";
+import { addToDo, editToDo } from "../actions/todo_actions";
 
-const ToDoTextInput = () => {
+const ToDoTextInput = ({ todo, handleBlur, isNew, onSave }) => {
   const dispatch = useDispatch();
-  const [newToDo, setNewToDo] = useState("");
+  const [newToDo, setNewToDo] = useState(todo?.text || "");
 
   const handleChange = (e) => {
     const {
@@ -14,12 +14,14 @@ const ToDoTextInput = () => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    const {
-      target: { value },
-    } = e;
     console.log(newToDo);
-    dispatch(addToDo(newToDo));
-    setNewToDo("");
+    if (isNew) {
+      dispatch(addToDo(newToDo));
+      setNewToDo("");
+    } else {
+      dispatch(editToDo(todo?.id, newToDo));
+      onSave();
+    }
   };
   return (
     <form onSubmit={handleSubmit}>
@@ -29,6 +31,7 @@ const ToDoTextInput = () => {
         value={newToDo}
         onChange={handleChange}
         autoFocus={true}
+        onBlur={handleBlur}
       />
     </form>
   );
