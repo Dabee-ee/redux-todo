@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { deleteToDo, editToDo } from "../actions/todo_actions";
+import { completeToDo, deleteToDo } from "../actions/todo_actions";
 import ToDoTextInput from "./ToDoTextInput";
 
 const ToDoItem = ({ todo }) => {
@@ -32,8 +32,19 @@ const ToDoItem = ({ todo }) => {
         </li>
       ) : (
         <li>
-          <input type="checkbox" />
-          <label onDoubleClick={handleDoubleClick}>{todo.text}</label>
+          <input
+            type="checkbox"
+            checked={todo.completed}
+            onChange={() => dispatch(completeToDo(todo.id))}
+          />
+          <label
+            onDoubleClick={handleDoubleClick}
+            style={{
+              textDecorationLine: todo.completed ? "line-through" : "none",
+            }}
+          >
+            {todo.text}
+          </label>
           <button onClick={handleDeleteToDo}>Delete</button>
         </li>
       )}
