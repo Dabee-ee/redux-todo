@@ -1,16 +1,17 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import Header from "./Header";
-import ToDoList from "./ToDoList";
+import ToDoList from "./TodoList";
+import TodoTemplate from "./TodoTemplate";
+import ToDoTextInput from "./TodoTextInput";
 
 function App() {
   const todos = useSelector((state) => state.todos);
-  console.log(todos);
+
   return (
-    <>
-      <Header />
+    <TodoTemplate>
+      <ToDoTextInput isNew={true} />
       <ToDoList todos={todos} />
-    </>
+    </TodoTemplate>
   );
 }
 

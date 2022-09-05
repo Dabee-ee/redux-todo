@@ -1,12 +1,10 @@
 import React from "react";
-import ToDoItem from "./ToDoItem";
+import TodoListItem from "./TodoListItem";
 
 const TodoList = ({ todos }) => (
-  <ul className="todo-list">
-    {todos.map((todo) => (
-      <ToDoItem key={todo.id} todo={todo} />
-    ))}
-  </ul>
+  <div className="TodoList">
+    {todos && todos.map((todo) => <TodoListItem todo={todo} key={todo.id} />)}
+  </div>
 );
 
-export default TodoList;
+export default React.memo(TodoList);

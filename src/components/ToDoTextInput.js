@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import { MdAdd } from "react-icons/md";
 import { addToDo, editToDo } from "../actions/todo_actions";
+import "./TodoTextInput.scss";
 
 const ToDoTextInput = ({ todo, handleBlur, isNew, onSave }) => {
   const dispatch = useDispatch();
@@ -24,7 +26,7 @@ const ToDoTextInput = ({ todo, handleBlur, isNew, onSave }) => {
     }
   };
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="TodoInsert" onSubmit={handleSubmit}>
       <input
         type="text"
         placeholder="What needs to be done?"
@@ -33,6 +35,9 @@ const ToDoTextInput = ({ todo, handleBlur, isNew, onSave }) => {
         autoFocus={true}
         onBlur={handleBlur}
       />
+      <button type="submit">
+        <MdAdd />
+      </button>
     </form>
   );
 };
